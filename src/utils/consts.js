@@ -1,0 +1,1 @@
+export const SITE = 'https://barcelona.m-works.ru/api-doc/';

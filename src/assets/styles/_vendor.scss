@@ -1,0 +1,8 @@
+@import "../../../node_modules/reset-css/sass/reset";
+@import "../../../node_modules/skeleton-mammoth/dist/skeleton-mammoth.min.css";
+.sm-item-primary, .sm-item-secondary {
+  .sm-loading & {
+    border-radius: 4px;
+  }
+}
+@import "../../../node_modules/zuck.js/dist/zuck.min.css";

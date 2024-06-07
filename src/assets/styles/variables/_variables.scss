@@ -1,0 +1,51 @@
+// stylelint-disable scss/dollar-variable-empty-line-before
+
+// COLORS
+$color-black: #000;
+$color-white: #fff;
+$color-white-op-50: rgba(#fff, 0.5);
+$color-white-op-12: rgba(#fff, 0.12);
+$color-black-op-4: rgba(#000, 0.04);
+$color-dark-blue-op-4: rgba(#15212C, 0.04);
+$color-gray-1: #f5f7f9;
+$color-gray-2: #676F7B;
+$color-gray-3: #A6AFB8;
+$color-gray-4: #EEF2F5;
+$color-gray-5: #7F8895;
+$color-gray-6: #EEF1F5;
+$color-gray-7: #DEE3E8;
+$color-gray-8: #C8CED4;
+$color-gray-9: #F0F8FF;
+$color-gray-10: #F1F4F8;
+$color-gray-11: #585E69;
+$color-gray-12: #D0D1D3;
+$color-gray-13: #98A3B3;
+$color-dark: #2E2F33;
+$color-dark-2: #373741;
+$color-dark-3: #42454B;
+$color-dark-4: #1E2939;
+$color-dark-5: #36383E;
+$color-primary-blue: #0171DD;
+$color-blue-2: #E2F2FF;
+$color-blue-3: #8CC8FF;
+$color-red: #F01A2E;
+$color-red-2: #FCE8E9;
+$color-yellow: #FFBF00;
+
+// FONTS
+// stylelint-disable-next-line
+$font-primary: Inter, sans-serif;
+
+$font-weight-400: 400;
+$font-weight-450: 400;
+$font-weight-500: 500;
+$font-weight-550: 500;
+$font-weight-600: 600;
+$font-weight-650: 600;
+$font-weight-700: 700;
+// EASING TRANSITIONS
+$duration-normal: 0.4s;
+$easing-back-out: cubic-bezier(0.25, 0.74, 0.22, 1.1); // http://cubic-bezier.com/#.25,.74,.22,1.1
+$easing-back-in: cubic-bezier(0.47, -0.1, 0.5, -0.06); // http://cubic-bezier.com/#.47,-0.1,.5,-.06
+$easing-out: ease-out;
+$easing-in: ease-in;

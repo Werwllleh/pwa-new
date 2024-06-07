@@ -1,0 +1,305 @@
+.chat {
+    // padding-top: 6.4rem;
+    // padding-bottom: 6.8rem;
+    // padding-bottom: 10rem;
+    display: flex;
+    justify-content: end;
+
+    &__flex {
+        display: flex;
+        flex: 1 1 100%;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+    }
+
+    &__date {
+        position: fixed;
+        width: max-content;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 7.2rem;
+        box-shadow: 0px 4px 8px 0px $color-dark-blue-op-4;
+        background-color: $color-white;
+        border-radius: 2.4rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        font-weight: $font-weight-500;
+        color: $color-gray-3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 8;
+    }
+
+    &__end {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        height: 0;
+    }
+}
+
+.message {
+    display: flex;
+    margin-top: 1.2rem;
+
+    &_incoming {
+        justify-content: start;
+        cursor: pointer;
+    }
+
+    &_outgoing {
+        justify-content: end;
+
+    }
+
+    &__inner {
+        position: relative;
+        width: max-content;
+        display: flex;
+        flex-direction: column;
+        max-width: calc(100% - 3.1rem);
+        min-width: 6rem;
+        border-radius: 1.2rem;
+        padding: 0.8rem 1.2rem 1.6rem;
+
+        .message_incoming & {
+            background-color: $color-gray-1;
+        }
+
+        .message_outgoing & {
+            position: relative;
+            background-color: $color-blue-2;
+
+            &:after {
+                content: '';
+                position: absolute;
+                width: 1.2rem;
+                height: 1.2rem;
+                bottom: 0;
+                right: -0.5rem;
+                background-image: url('../../../../public/assets/images/bubble-tail.svg');
+            }
+        }
+    }
+
+    &__quote {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.8rem;
+        padding-left: 0.8rem;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0.2rem;
+            background-color: $color-primary-blue;
+        }
+
+        &-name,
+        &-text {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            font-weight: $font-weight-500;
+        }
+
+        &-name {
+            margin-bottom: 0.1rem;
+
+            .message_incoming & {
+                color: $color-gray-5;
+            }
+
+            .message_outgoing & {
+                color: $color-primary-blue;
+            }
+        }
+
+        &-text {
+            color: $color-dark-3;
+        }
+    }
+
+    &__text {
+        position: relative;
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+        letter-spacing: -0.005em;
+        text-align: left;
+        font-weight: $font-weight-400;
+        overflow: hidden;
+    }
+
+    &__info {
+        position: absolute;
+        right: 0.8rem;
+        bottom: 0.4rem;
+        display: flex;
+
+        .message_incoming & {
+            color: $color-gray-8;
+        }
+
+        .message_outgoing & {
+            color: $color-blue-3;
+        }
+    }
+
+    &__time {
+        margin-right: 0.2rem;
+        font-size: 1rem;
+        line-height: 1.2rem;
+        font-weight: $font-weight-600;
+        letter-spacing: -0.03em;
+    }
+
+    &__status {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+}
+
+.chat-actions {
+    width: 100%;
+    // height: 6.8rem;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    box-shadow: 0px -1px 0px 0px #98A3B31F;
+    background-color: $color-white;
+    padding: 1.2rem 0;
+    padding-bottom: 3.2rem;
+    z-index: 10;
+
+    .keyboard-active & {
+        margin-bottom: 0;
+    }
+
+    &__inner {
+        position: relative;
+        max-width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    svg {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    &-quote {
+        position: relative;
+        padding-bottom: 0.4rem;
+        padding-right: 3.2rem;
+
+        .message__quote-name {
+            color: $color-primary-blue;
+        }
+
+        &__cancel {
+            width: 2.4rem;
+            height: 2.4rem;
+            position: absolute;
+            right: 0;
+            top: 0.45rem;
+            // top: 50%;
+            // transform: translateY(-50%);
+            cursor: pointer;
+
+            svg {
+                fill: #000;
+            }
+        }
+    }
+}
+
+.chat-attachment {
+    position: relative;
+    width: 2.4rem;
+    height: 2.4rem;
+    flex: 0 0 2.4rem;
+    margin-right: 1.2rem;
+
+    &__view,
+    &__input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    &__view {
+        z-index: 1;
+    }
+
+    &__input {
+        z-index: 2;
+        opacity: 0;
+    }
+}
+
+.chat-input-text {
+    flex: 1 1 100%;
+
+    &__textarea {
+        width: 100%;
+        height: 4.4rem;
+        padding: 1.2rem 4.8rem 1.2rem 1.2rem;
+        resize: none;
+        font-size: 1.6rem;
+        line-height: 2rem;
+        font-weight: $font-weight-450;
+        color: $color-dark-3;
+        background-color: $color-gray-1;
+        border-radius: 1.2rem;
+        scrollbar-width: 0;
+
+        &::placeholder {
+            color: $color-gray-13;
+        }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+.chat-send-message {
+    position: absolute;
+    right: 2.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal-message-action {
+    height: 5.6rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    font-weight: 400;
+    cursor: pointer;
+
+    svg {
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-right: 1.2rem;
+    }
+}

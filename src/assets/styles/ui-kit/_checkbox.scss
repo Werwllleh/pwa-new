@@ -1,0 +1,65 @@
+.checkbox {
+    position: relative;
+    width: 100%;
+    padding-left: 2.6rem;
+    text-align: left;
+
+    &.agreement {
+        max-width: 47rem;
+    }
+
+    &__input,
+    &__check {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    
+    &__check {
+        z-index: 1;
+        border-radius: 0.4rem;
+        border: 0.2rem solid $color-gray-8;
+        transition: 0.2s;
+
+        svg {
+            fill: none;
+            stroke: #fff;
+            opacity: 0;
+            transition: 0.2s;
+        }
+    }
+
+    &__input {
+        z-index: 2;
+        opacity: 0;
+        cursor: pointer;
+
+        &:checked~.checkbox__check {
+            background-color: $color-primary-blue;
+            border-color: $color-primary-blue;
+            border: none;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__label {
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+        font-weight: $font-weight-500;
+        color: $color-dark-2;
+        cursor: pointer;
+    }
+
+    &.error {
+        .field__error {
+            margin-top: 0.6rem;
+        }
+    }
+}

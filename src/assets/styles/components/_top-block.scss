@@ -1,0 +1,67 @@
+.top-block {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    min-height: 4.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 0;
+    background-color: $color-white;
+    box-shadow: 0px 1px 0px 0px rgba(#C8CFD8, 0.12);
+    z-index: 10;
+
+    &_fixed {
+        position: sticky;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid $color-gray-6;
+        box-shadow: none;
+        z-index: 10;
+    }
+
+    &__btn {
+        position: absolute;
+        width: 2.4rem;
+        height: 2.4rem;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        &_left {
+            left: 1.2rem;
+        }
+        &_right {
+            right: 1.2rem;
+        }
+    }
+
+    &__title {
+        display: flex;
+        flex: 1 1 100%;
+        padding: 0 3.2rem;
+        align-items: center;
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        font-weight: $font-weight-650;
+        color: $color-dark;
+        justify-content: center;
+
+        &_left {
+            justify-content: start;
+        }
+    }
+
+    &__avatar {
+        width: 4rem;
+        height: 4rem;
+        margin-right: 0.8rem;
+        border-radius: 4rem;
+        border: 1px solid $color-black-op-4;
+    }
+
+    &__user-name {
+        font-size: 1.6rem;
+        line-height: 1.6rem;
+    }
+}

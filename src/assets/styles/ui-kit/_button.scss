@@ -1,0 +1,36 @@
+.button {
+    width: 100%;
+    height: 5.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-primary-blue;
+    border-radius: 1.2rem;
+    font-family: $font-primary;
+    font-size: 1.6rem;
+    font-weight: $font-weight-550;
+    color: $color-white;
+
+    &_h-52 {
+        height: 5.2rem;
+    }
+
+    &:disabled {
+        background-color: $color-gray-4;
+        color: $color-gray-5;
+        cursor: default;
+    }
+
+    &_color-2 {
+        background-color: $color-gray-9;
+        color: $color-primary-blue;
+
+        svg {
+            fill: $color-primary-blue;
+        }
+    }
+
+    .code-timer {
+        color: $color-gray-11;
+    }
+}

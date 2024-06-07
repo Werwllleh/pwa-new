@@ -1,0 +1,57 @@
+.header {
+    flex: 0 0 5.6rem;
+    height: 5.6rem;
+    width: 100%;
+    background-color: $color-white;
+
+    &__flex {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        width: 3.2rem;
+        height: 3.2rem;
+        background-image: url('../../../../public/assets/images/logo.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    &__actions {
+        display: flex;
+        flex: 1 1 100%;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__call,
+    &__notifications {
+        position: relative;
+        width: 2.4em;
+        height: 2.4rem;
+        cursor: pointer;
+    }
+
+    &__notifications {
+        margin-left: 1.2rem;
+        
+        span {
+            position: absolute;
+            top: -0.4rem;
+            right: -0.4rem;
+            padding: 0.1rem 0.2rem 0.2rem;
+            background-color: $color-red;
+            color: $color-white;
+            border: 0.2rem solid $color-white;
+            border-radius: 2.4rem;
+            font-size: 1rem;
+            line-height: 1rem;
+            font-weight: $font-weight-700;
+        }
+    }
+}

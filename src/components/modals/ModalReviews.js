@@ -27,7 +27,7 @@ const ModalReviews = ({active, onClose}) => {
 
   const reviews = useReviewStore((state) => state.reviews);
   const totalReviews = useReviewStore((state) => state.totalReviews);
-  const updateReviews = useReviewStore((state) => state.updateReviewsMain);
+  const updateReviews = useReviewStore((state) => state.getReviews);
   const page = useReviewStore((state) => state.page);
   const isLoading = useReviewStore((state) => state.isLoading);
 

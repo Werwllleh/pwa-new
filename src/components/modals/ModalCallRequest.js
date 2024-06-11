@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "../Input";
 import MaskedInput from "../MaskedInput";
-import {useUserStore} from "../../store/user-store2";
+import {useUserStore} from "../../store/user-store";
 
 const ModalCallRequest = ({active, onClose}) => {
 

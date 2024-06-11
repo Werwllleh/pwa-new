@@ -11,9 +11,9 @@ const Review = ({photoSrc, sourceSrc, author, date, rate, text=''}) => {
     <div className={cn('review', {'sm-loading': text.length === 0})}>
       <div className="review__title">
         <div className="review__user-photo sm-item-primary">
-          <img src={process.env.REACT_APP_DOMAIN + photoSrc} alt={author} height="40" className="" />
+          <img src={process.env.REACT_APP_API_DOMAIN + photoSrc} alt={author} height="40" className="" />
           <div className="review__source">
-            <img src={process.env.REACT_APP_DOMAIN + sourceSrc} alt=""/>
+            <img src={process.env.REACT_APP_API_DOMAIN + sourceSrc} alt=""/>
           </div>
         </div>
         <div className="review__info">

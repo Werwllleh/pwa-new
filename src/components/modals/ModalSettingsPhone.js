@@ -1,7 +1,7 @@
 import Icon from "../Icon";
 import {useEffect, useRef, useState} from "react";
 import MaskedInput from "../MaskedInput";
-import {getAuthCode, getUserByPhoneNumber, useUserStore} from "../../store/user-store2";
+import {useUserStore} from "../../store/user-store";
 import {useForm} from "react-hook-form";
 
 const ModalSettingsPhone = ({code, onClose}) => {
@@ -10,7 +10,7 @@ const ModalSettingsPhone = ({code, onClose}) => {
 
   const [smsCode, setSmsCode] = useState(null);
 
-  const [setPhoneNumber] = useUserStore((state) => [state.setPhoneNumber]);
+  //const [setPhoneNumber] = useUserStore((state) => [state.setPhoneNumber]);
   const {register, handleSubmit, formState, setError, control, watch, resetField } = useForm();
 
   const phoneValue = watch("phone");
@@ -77,7 +77,8 @@ const ModalSettingsPhone = ({code, onClose}) => {
     e.preventDefault()
     if (stepValue2.length === 11) {
       setErrorStatus(false)
-      getUserByPhoneNumber(clearPhone).then((result) => {
+      // FIXME
+      /*getUserByPhoneNumber(clearPhone).then((result) => {
         if (result) {
           setError("phone", {message: "Пользователь с таким номером уже существует"})
         }
@@ -89,7 +90,7 @@ const ModalSettingsPhone = ({code, onClose}) => {
             }
           })
         }
-      })
+      })*/
     } else {
       setErrorStatus(true)
       setError("phone", {message: "Неверный номер телефона"});
@@ -133,17 +134,18 @@ const ModalSettingsPhone = ({code, onClose}) => {
 
   const recall = (e) => {
     e.preventDefault();
-    getAuthCode().then((res) => {
+    // FIXME
+    /*getAuthCode().then((res) => {
       if (res.code) {
         setSmsCode(res.code);
       }
-    })
+    })*/
   }
 
   useEffect(() => {
     if (stepValue3.join('').length === 4) {
       if (stepValue3.join('') === smsCode) {
-        setPhoneNumber(clearPhone);
+        /*setPhoneNumber(clearPhone);*/
         closePhoneModal()
       } else {
         setErrorStatus(true)

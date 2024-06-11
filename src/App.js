@@ -1,30 +1,22 @@
 import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {use100vh} from 'react-div-100vh'
 import LayoutBase from "@components/layouts/LayoutBase";
 import PageMain from "@pages/PageMain";
-import PageAuthorization from "@pages/PageAuthorization";
+import PageLogin from "@pages/PageLogin";
+import PageLoginAuth from "./pages/PageLoginAuth";
 import PageNotifications from "@pages/PageNotifications";
 import PageCall from "@pages/PageCall";
 import PageChat from "@pages/PageChat";
 import PageMainAuth from "@pages/PageMainAuth";
-import PageAuthorizationNewPassword from "@pages/PageAuthorizationNewPassword";
-import PageRegistration from "@pages/PageRegistration";
+import PageChangePassword from "@pages/PageChangePassword";
+import PageRegister from "@pages/PageRegister";
 import PageSettings from "@pages/PageSettings";
-import {useUserStore} from "./store/user-store2";
-import {use100vh} from 'react-div-100vh'
-
-
+import RequiredAuth from "./components/RequiredAuth";
+import {SIPProvider} from "react-sipjs";
 
 function App() {
   const height = use100vh()
-
-  const user = useUserStore((state) => state.currentUser)
-  const getUser = useUserStore((state) => state.getUser);
-
-
-  useEffect(() => {
-    getUser()
-  }, [getUser]);
 
   return (
     <>
@@ -33,14 +25,27 @@ function App() {
           <Router>
             <Routes>
               <Route index element={<PageMain/>}/>
-              <Route path='/index-auth' element={<PageMainAuth/>}/>
-              <Route path='/authorization' element={<PageAuthorization/>}/>
-              <Route path='/authorization-new-password' element={<PageAuthorizationNewPassword/>}/>
-              <Route path='/notifications' element={<PageNotifications/>}/>
-              <Route path='/call' element={<PageCall/>}/>
-              <Route path='/chat' element={<PageChat/>}/>
-              <Route path='/registration' element={<PageRegistration/>}/>
-              <Route path='/settings' element={<PageSettings/>}/>
+              <Route path='/login' element={<PageLogin/>}/>
+              <Route path='/login-auth' element={<PageLoginAuth/>}/>
+              <Route path='/register' element={<PageRegister/>}/>
+              <Route path='/change-password' element={<PageChangePassword/>}/>
+              <Route element={<RequiredAuth/>}>
+                <Route path='/main' element={<PageMainAuth/>}/>
+                <Route path='/settings' element={<PageSettings/>}/>
+                <Route path='/notifications' element={<PageNotifications/>}/>
+                <Route path='/call' element={
+                  <SIPProvider
+                    options={{
+                      domain: "188.120.230.120.sslip.io",
+                      webSocketServer: "wss://188.120.230.120.sslip.io:8089/ws",
+                    }}
+                  >
+                    <PageCall/>
+                  </SIPProvider>
+                }/>
+                <Route path='/chat' element={<PageChat/>}/>
+              </Route>
+              <Route path='*' element={<PageLogin/>}/>
             </Routes>
           </Router>
         </LayoutBase>

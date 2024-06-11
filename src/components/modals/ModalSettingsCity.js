@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
-import {useUserStore} from "../../store/user-store2";
+import {useUserStore} from "../../store/user-store";
 import Input from "../Input";
 
 const ModalSettingsCity = ({city, onClose}) => {

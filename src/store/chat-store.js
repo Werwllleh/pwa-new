@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import axios from "axios";
+import apiClient from "../api/axiosConfig";
 
 export const useChatStore = create((set) => ({
   chat: [],
@@ -7,7 +7,7 @@ export const useChatStore = create((set) => ({
   replyMessageId: null,
   chatModalOpen: false,
   updateChat: async () => {
-    const response = await axios.get(`${process.env.REACT_APP_REST_SERVER_URL}/chat`)
+    const response = await apiClient.get(`${process.env.REACT_APP_REST_SERVER_URL}/chat`)
     set({chat: await response.data})
   },
   addChatMessage: (data) => set((state) => ({ chat: [...state.chat, data] })),

@@ -17,7 +17,7 @@ const MaskedInput = forwardRef((props, inputRef) => {
   }, [value]);
 
     return (
-      <field className="field">
+      <div className="field">
         <div className={cn('input-text', {'error': error}, {'focused': isFocused}, {'filled': isFilled})}>
           <div className="input-text__placeholder">{labelText}</div>
           <IMaskInput
@@ -25,7 +25,6 @@ const MaskedInput = forwardRef((props, inputRef) => {
             inputRef={inputRef}
             ref={ref}
             mask={mask}
-            showMask={true}
             className="input-text__input"
             value={value}
             onAccept={(value) => {
@@ -45,7 +44,7 @@ const MaskedInput = forwardRef((props, inputRef) => {
           />
         </div>
         <div className="field__error">{error}</div>
-      </field>
+      </div>
     );
   }
 );

@@ -10,13 +10,13 @@ const Stories = () => {
 
     return Math.round(timeIndex - random);
   };
-  const [stories, updateStories] = useStoriesStore((state) => [state.stories, state.updateStories]);
+  const [stories, getStories] = useStoriesStore((state) => [state.stories, state.getStories]);
   const containerRef = createRef();
   const storiesRef = createRef();
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    updateStories()
+    getStories()
   }, [])
   useEffect(() => {
     if(stories.length>0){
@@ -48,10 +48,10 @@ const Stories = () => {
         {
           list.map((story, index) => (
             <div className={(story.seen ? 'story seen' : 'story')} key={index} data-id={story.id}
-                 data-last-updated={story.time} data-photo={story.photo}>
+                 data-last-updated={story.time} data-photo={process.env.REACT_APP_API_DOMAIN + story.photo}>
               <a className="item-link" href={story.link}>
                   <span className="item-preview">
-                    <img src={story.photo}/>
+                    <img src={process.env.REACT_APP_API_DOMAIN + story.photo}/>
                   </span>
                 <span className="info" itemProp="author" itemScope="" itemType="http://schema.org/Person">
                     <strong className="name" itemProp="name">{story.name}</strong>

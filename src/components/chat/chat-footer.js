@@ -5,7 +5,7 @@ import {useUserStore} from "../../store/user-store";
 
 const ChatFooter = () => {
 
-  const currentUser = useUserStore((state) => state.currentUser);
+  const {firstName, lastName} = useUserStore((state) => [state.firstName, state.lastName]);
 
   const chat = useChatStore((state) => state.chat);
   const addChatMessage = useChatStore((state) => state.addChatMessage);
@@ -29,8 +29,8 @@ const ChatFooter = () => {
 
       addChatMessage({
         id: chat.length + 1,
-        senderStatus: currentUser.status,
-        senderName: `${currentUser.info.name} ${currentUser.info.surname}`,
+        senderStatus: 'user',
+        senderName: `${firstName} ${lastName}`,
         text: messageText.trim(),
         answerMessageId: replyMessageId ? replyMessageId : null,
         date: messageSendTime

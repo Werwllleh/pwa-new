@@ -6,12 +6,12 @@ import plural from 'plural-ru'
 import cn from 'classnames'
 
 const ReviewList = () => {
-  const [totalRating, totalReviews, reviews, updateReviewsMain, updateTotal] = useReviewStore((state) => [state.totalRating, state.totalReviews, state.reviews, state.updateReviewsMain, state.updateTotal]);
+  const [totalRating, totalReviews, reviews, getReviews] = useReviewStore((state) => [state.totalRating, state.totalReviews, state.reviews, state.getReviews]);
   const [reviewsList, setReviewsList] = useState(Array(5).fill({}))
 
   useEffect(() => {
-    updateTotal()
-    updateReviewsMain()
+    //getReviewsSummary()
+    getReviews()
   }, [])
 
   useEffect(() => {

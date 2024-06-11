@@ -1,15 +1,12 @@
 import React from 'react';
-import Icon from "../Icon";
-import {useUserStore} from "../../store/user-store";
-import {useChatStore} from "../../store/chat-store";
 import { format } from 'date-fns';
+import cn from  'classnames';
+import Icon from "../Icon";
+import {useChatStore} from "../../store/chat-store";
 
 
 const MessageItem = ({message}) => {
-
-
   const chat = useChatStore((state) => state.chat);
-  const currentUser = useUserStore((state) => state.currentUser);
 
   const updateSelectedMessageId = useChatStore((state) => state.updateSelectedMessageId)
   const updateChatModalOpen = useChatStore((state) => state.updateChatModalOpen)
@@ -25,7 +22,11 @@ const MessageItem = ({message}) => {
   }
 
   return (
-    <li onClick={() => messageActionsModal(true, message.id)} className={`message ${currentUser.status === message.senderStatus ? 'message_outgoing' : 'message_incoming'}`} data-name={message.senderName}>
+    <li
+      onClick={() => messageActionsModal(true, message.id)}
+      className={cn('message', {'message_outgoing': message.senderStatus==='user'}, {'message_incoming': message.senderStatus==='clinic'})}
+      data-name={message.senderName}
+    >
       <div className="message__inner">
         {
           message.answerMessageId && (

@@ -8,7 +8,7 @@ const LayoutAuth = ({children}) => {
     setLoaded(true)
   }, [])
   return (
-    <div className={cn('page-loading-animation', {'on':loaded})}>
+    <div className={cn('_page-loading-animation', {'_on':loaded})}>
       <div className="auth">
         {children}
       </div>

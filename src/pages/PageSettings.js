@@ -1,6 +1,6 @@
 import LayoutWithTopBlock from "@components/layouts/LayoutWithTopBlock";
 import Icon from "@components/Icon";
-import {useUserStore} from "../store/user-store2";
+import {useUserStore} from "../store/user-store";
 import Switch from "../components/buttons/switch";
 import LayoutSettingsModal from "../components/layouts/LayoutSettingsModal";
 import ModalSettingsName from "../components/modals/ModalSettingsName";
@@ -80,7 +80,7 @@ const PageSettings = () => {
                     <div className="setting__info">
                       <div className="setting__name">Номер телефона</div>
                       <div className="setting__value"
-                           data-setting="phone">{phoneNumber.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4 $5")}</div>
+                           data-setting="phone">{phoneNumber?.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4 $5")}</div>
                     </div>
                     <span className="setting__arrow">
                                   <Icon name="angle-right"/>

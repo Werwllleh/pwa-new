@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {useUserStore} from "../../store/user-store2";
+import {useUserStore} from "../../store/user-store";
 import MaskedInput from "../MaskedInput";
 
 const ModalSettingsBirthday = ({birthDate, onClose}) => {

@@ -1,6 +1,5 @@
 import React, {cloneElement, useEffect, useState} from 'react';
 import Icon from "../Icon";
-import {useUserStore} from "../../store/user-store";
 
 
 const LayoutSettingsModal = ({active, title, onClose, className, closeButton, children}) => {

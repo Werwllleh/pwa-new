@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Icon from "../Icon";
-import {useUserStore} from "../../store/user-store2";
+import {useUserStore} from "../../store/user-store";
 
 const ModalSettingsPassword = ({code, onClose}) => {
 

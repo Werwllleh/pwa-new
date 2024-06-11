@@ -5,7 +5,7 @@ import Stories from "@components/Stories";
 import {Link} from "react-router-dom";
 import ReviewList from "../components/ReviewList";
 import {useAdvantageStore} from "../store/advantage-store";
-import {useUserStore} from "../store/user-store2";
+import {useUserStore} from "../store/user-store";
 import {useEffect, useState} from "react";
 import Advantage from "../components/Advantage";
 import ModalQuestions from "../components/modals/ModalQuestions";
@@ -14,11 +14,11 @@ import ModalCallRequest from "../components/modals/ModalCallRequest";
 
 const PageMain = () => {
   const [firstName] = useUserStore((state) => [state.firstName]);
-  const [advantages, updateAdvantages] = useAdvantageStore((state) => [state.advantagesAuth, state.updateAdvantagesAuth]);
+  const [advantages, getAdvantages] = useAdvantageStore((state) => [state.advantages, state.getAdvantages]);
   const [advantagesList, setAdvantagesList] = useState(Array(3).fill({}));
   useEffect(() => {
-    updateAdvantages()
-  }, [updateAdvantages]);
+    getAdvantages()
+  }, [getAdvantages]);
   useEffect(() => {
     if (advantages.length > 0) {
       setAdvantagesList(advantages);

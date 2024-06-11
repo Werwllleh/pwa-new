@@ -2,14 +2,14 @@ import Icon from "./Icon";
 import {Link, useNavigate} from "react-router-dom";
 import {useUserStore} from "../store/user-store";
 import ModalChatsAccess from "./modals/ModalChatsAccess";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 const Footer = () => {
 
   const navigate = useNavigate()
 
-  const userAuth = useUserStore((state) => state.auth)
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated)
 
   const [isModalActive, setIsModalActive] = useState(false);
 
@@ -19,7 +19,7 @@ const Footer = () => {
   };
 
   const goToChatPage = () => {
-    if (userAuth) {
+    if (isAuthenticated) {
       navigate("/chat")
     } else {
       toggleModal()
@@ -31,7 +31,7 @@ const Footer = () => {
     <>
       <footer className="footer">
         <div className="container">
-          {userAuth && (
+          {isAuthenticated && (
             <div className="footer__actions">
               <Link className="button button_h-52" to="https://glorias.ru/glmhg" target="_blank">Записаться на
                 коррекцию</Link>

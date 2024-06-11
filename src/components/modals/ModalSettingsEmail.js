@@ -1,7 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
 import Input from "../Input";
-import {useUserStore} from "../../store/user-store2";
+import {useUserStore} from "../../store/user-store";
 
 const ModalSettingsEmail = ({email, onClose}) => {
 

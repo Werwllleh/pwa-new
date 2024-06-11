@@ -14,7 +14,7 @@ const Input = (props) => {
   }, [value]);
 
   return (
-    <field className="field">
+    <div className="field">
       <div className={cn('input-text', {'error': error}, {'focused': isFocused}, {'filled': isFilled})}>
         <div className="input-text__placeholder">{placeholder}</div>
         <input
@@ -39,7 +39,7 @@ const Input = (props) => {
         />
       </div>
       <div className="field__error">{error}</div>
-    </field>
+    </div>
   );
 }
 export default Input

@@ -10,11 +10,11 @@ import {useEffect, useState} from "react";
 import ModalReviews from "../components/modals/ModalReviews";
 
 const PageMain = () => {
-  const [advantages, updateAdvantages] = useAdvantageStore((state) => [state.advantages, state.updateAdvantages]);
+  const [advantages, getAdvantages] = useAdvantageStore((state) => [state.advantages, state.getAdvantages]);
   const [advantagesList, setAdvantagesList] = useState(Array(6).fill({}));
   useEffect(() => {
-    updateAdvantages()
-  }, [updateAdvantages]);
+    getAdvantages()
+  }, [getAdvantages]);
   useEffect(() => {
     if (advantages.length > 0) {
       setAdvantagesList(advantages);

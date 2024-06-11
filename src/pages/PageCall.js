@@ -22,10 +22,21 @@ const PageCall = () => {
 
 
 
+
   useEffect(() => {
-    connectAndRegister({
-      username: config.impi,
-      password: config.password,
+    const requestPermissions = async () => {
+      try {
+        await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      } catch (error) {
+        console.error(`Error accessing media devices: ${error.message}`);
+      }
+    };
+
+    requestPermissions().then(() => {
+      connectAndRegister({
+        username: config.impi,
+        password: config.password,
+      });
     });
   }, [connectAndRegister]);
 

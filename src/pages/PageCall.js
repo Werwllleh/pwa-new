@@ -20,8 +20,10 @@ const PageCall = () => {
     connectStatus,
   } = useSIPProvider();
 
+  const sessionCall = useSessionCall(sessionData);
+  const { hangup, mute, unmute } = sessionCall || {};
 
-
+  console.log(SessionState);
 
   useEffect(() => {
     const requestPermissions = async () => {
@@ -44,13 +46,13 @@ const PageCall = () => {
     if (sessions) {
       Object.keys(sessions).map((sessionId) => (
         setSessionData(sessionId)
-      ))
+      ));
     }
   }, [sessions]);
 
   useEffect(() => {
     if (sessionData) {
-      console.log(sessionData)
+      console.log(sessionData);
     }
   }, [sessionData]);
 
@@ -62,27 +64,26 @@ const PageCall = () => {
     if (sessionManager) {
       await sessionManager.call(`sip:${callTo}@${config.realm}`);
     }
-  }
+  };
 
   const rejectCall = () => {
-    if (sessionManager) {
-      console.log(sessionManager)
-      console.log(sessionData)
-
+    if (hangup) {
+      hangup();
     }
-  }
+  };
 
   const muteMic = () => {
-    // if (sessionManager) {
-    //   if (isMuted) {
-    //     unmute();
-    //   } else {
-    //     mute();
-    //   }
-    //   setMuted(!muted);
-    // }
-  }
-
+    if (muted) {
+      if (unmute) {
+        unmute();
+      }
+    } else {
+      if (mute) {
+        mute();
+      }
+    }
+    setMuted(!muted);
+  };
 
   return (
     <div className={cn('page-loading-animation', {'on': loaded})}>
@@ -98,8 +99,8 @@ const PageCall = () => {
           <button className="call__action call__action_reset" onClick={rejectCall}>
             <Icon name="phone"/>
           </button>
-          <button className="call__action call__action_reset" onClick={acceptCall}>
-            <Icon name="close"/>
+          <button style={{backgroundColor: 'green'}} className="call__action" onClick={acceptCall}>
+            <Icon name="phone"/>
           </button>
           <div className="call__action toggle-active">
             <Icon name="speakers"/>
@@ -108,6 +109,6 @@ const PageCall = () => {
       </div>
     </div>
   );
-}
+};
 
 export default PageCall;

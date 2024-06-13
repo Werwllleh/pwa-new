@@ -44,33 +44,34 @@ const CallActions = ({sessionData}) => {
   }
 
   const speakerToggle = async () => {
-    if (audioRef.current && typeof audioRef.current.setSinkId === 'function') {
-      try {
-        const deviceId = speakerActive ? 'default' : 'communications'; // Пример идентификаторов устройств
-        await audioRef.current.setSinkId(deviceId);
-        setSpeakerActive(!speakerActive);
-        console.log(`Audio output device set to ${deviceId}`);
-      } catch (error) {
-        console.error('Error setting audio output device:', error);
-      }
-    } else {
-      console.warn('setSinkId is not supported by this browser.');
-    }
-  };
 
-  useEffect(() => {
-    if (session && session.sessionDescriptionHandler) {
-      const remoteStream = new MediaStream();
-      session.sessionDescriptionHandler.peerConnection.getReceivers().forEach(receiver => {
-        if (receiver.track) {
-          remoteStream.addTrack(receiver.track);
-        }
-      });
-      if (audioRef.current) {
-        audioRef.current.srcObject = remoteStream;
-      }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+      console.log("enumerateDevices() не поддерживается.");
+      return;
     }
-  }, [session]);
+
+    setSpeakerActive(!speakerActive);
+
+    navigator.mediaDevices
+      .enumerateDevices()
+      .then(async function (devices) {
+        const outDevices = devices.filter((device) => device.kind === 'audiooutput' && device.deviceId !== 'default' && device.deviceId !== 'communications');
+        console.log(outDevices)
+
+        if (speakerActive) {
+          await audioRef.current.setSinkId(outDevices[0].deviceId);
+          console.log(`Audio is being output on ${outDevices[0].label}`);
+        } else {
+          await audioRef.current.setSinkId(outDevices[1].deviceId);
+          console.log(`Audio is being output on ${outDevices[1].label}`);
+        }
+
+      })
+      .catch(function (err) {
+        console.log(err.name + ": " + err.message);
+      });
+
+  };
 
 
   return (

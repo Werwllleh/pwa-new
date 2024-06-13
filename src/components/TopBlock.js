@@ -18,8 +18,13 @@ const TopBlock = ({isFixed = true}) => {
 
 
 
-  const goCall = () => {
-    navigate('/call');
+  const goCall = async () => {
+    await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+      .then((data) => {
+        if (data.active) {
+          navigate('/call');
+        }
+      })
   }
 
 

@@ -20,25 +20,12 @@ const PageCall = () => {
     connectStatus,
   } = useSIPProvider();
 
-  const sessionCall = useSessionCall(sessionData);
-  const { hangup, mute, unmute } = sessionCall || {};
 
-  console.log(SessionState);
 
   useEffect(() => {
-    const requestPermissions = async () => {
-      try {
-        await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-      } catch (error) {
-        console.error(`Error accessing media devices: ${error.message}`);
-      }
-    };
-
-    requestPermissions().then(() => {
-      connectAndRegister({
-        username: config.impi,
-        password: config.password,
-      });
+    connectAndRegister({
+      username: config.impi,
+      password: config.password,
     });
   }, [connectAndRegister]);
 
@@ -46,13 +33,13 @@ const PageCall = () => {
     if (sessions) {
       Object.keys(sessions).map((sessionId) => (
         setSessionData(sessionId)
-      ));
+      ))
     }
   }, [sessions]);
 
   useEffect(() => {
     if (sessionData) {
-      console.log(sessionData);
+      console.log(sessionData)
     }
   }, [sessionData]);
 
@@ -64,26 +51,32 @@ const PageCall = () => {
     if (sessionManager) {
       await sessionManager.call(`sip:${callTo}@${config.realm}`);
     }
-  };
+  }
 
   const rejectCall = () => {
-    if (hangup) {
-      hangup();
+    if (sessionManager) {
+      console.log(sessionManager)
+      console.log(sessionData)
+
     }
-  };
+  }
 
   const muteMic = () => {
-    if (muted) {
-      if (unmute) {
-        unmute();
-      }
-    } else {
-      if (mute) {
-        mute();
-      }
-    }
+
+    console.log()
+
     setMuted(!muted);
-  };
+
+    // if (sessionManager) {
+    //   if (isMuted) {
+    //     unmute();
+    //   } else {
+    //     mute();
+    //   }
+    //   setMuted(!muted);
+    // }
+  }
+
 
   return (
     <div className={cn('page-loading-animation', {'on': loaded})}>
@@ -99,7 +92,7 @@ const PageCall = () => {
           <button className="call__action call__action_reset" onClick={rejectCall}>
             <Icon name="phone"/>
           </button>
-          <button style={{backgroundColor: 'green'}} className="call__action" onClick={acceptCall}>
+          <button style={{backgroundColor: 'green'}} className="call__action call__action_reset" onClick={acceptCall}>
             <Icon name="phone"/>
           </button>
           <div className="call__action toggle-active">
@@ -109,6 +102,6 @@ const PageCall = () => {
       </div>
     </div>
   );
-};
+}
 
 export default PageCall;

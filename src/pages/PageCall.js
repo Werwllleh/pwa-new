@@ -21,13 +21,29 @@ const PageCall = () => {
   } = useSIPProvider();
 
 
-
   useEffect(() => {
+    const requestPermissions = async () => {
+      try {
+        await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      } catch (error) {
+        console.error(`Error accessing media devices: ${error.message}`);
+      }
+    };
+
+    requestPermissions().then(() => {
+      connectAndRegister({
+        username: config.impi,
+        password: config.password,
+      });
+    });
+  }, [connectAndRegister]);
+
+  /*useEffect(() => {
     connectAndRegister({
       username: config.impi,
       password: config.password,
     });
-  }, [connectAndRegister]);
+  }, [connectAndRegister]);*/
 
   useEffect(() => {
     if (sessions) {

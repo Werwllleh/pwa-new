@@ -4,12 +4,12 @@ import {sipConfig as config} from "../utils/consts";
 import cn from 'classnames';
 import {useSIPProvider, useSessionCall} from "react-sipjs";
 import {SessionState} from "sip.js";
+import CallActions from "../components/CallActions";
 
 const PageCall = () => {
-  const [loaded, setLoaded] = useState(false);
-  const [muted, setMuted] = useState(false);
-  const [callTo, setCallTo] = useState("*43");
 
+  const [loaded, setLoaded] = useState(false);
+  const [callTo, setCallTo] = useState("*43");
   const [sessionData, setSessionData] = useState(null);
 
   const {
@@ -47,44 +47,18 @@ const PageCall = () => {
   }, [sessions]);
 
   useEffect(() => {
-    if (sessionData) {
-      console.log(sessionData)
-    }
-  }, [sessionData]);
-
-  useEffect(() => {
     setLoaded(true);
   }, []);
 
-  const acceptCall = async () => {
-    if (sessionManager) {
-      await sessionManager.call(`sip:${callTo}@${config.realm}`);
+  useEffect(() => {
+    async function doCall() {
+      if (sessionManager) {
+        await sessionManager.call(`sip:${callTo}@${config.realm}`);
+      }
     }
-  }
+    doCall();
+  }, [sessionManager]);
 
-  const rejectCall = () => {
-    if (sessionManager) {
-      console.log(sessionManager)
-      console.log(sessionData)
-
-    }
-  }
-
-  const muteMic = () => {
-
-    console.log()
-
-    setMuted(!muted);
-
-    // if (sessionManager) {
-    //   if (isMuted) {
-    //     unmute();
-    //   } else {
-    //     mute();
-    //   }
-    //   setMuted(!muted);
-    // }
-  }
 
 
   return (
@@ -94,20 +68,7 @@ const PageCall = () => {
           <div className="call__status">Соединение...</div>
           <div className="call__name">Горячая линия «Микрохирургия глаза»</div>
         </div>
-        <div className="call__actions container">
-          <button className={cn('call__action toggle-active', {'active': muted})} onClick={muteMic}>
-            <Icon name="mic-off"/>
-          </button>
-          <button className="call__action call__action_reset" onClick={rejectCall}>
-            <Icon name="phone"/>
-          </button>
-          <button style={{backgroundColor: 'green'}} className="call__action call__action_reset" onClick={acceptCall}>
-            <Icon name="phone"/>
-          </button>
-          <div className="call__action toggle-active">
-            <Icon name="speakers"/>
-          </div>
-        </div>
+        {sessionData !== null ? <CallActions sessionData={sessionData} /> : null}
       </div>
     </div>
   );

@@ -38,13 +38,6 @@ const PageCall = () => {
     });
   }, [connectAndRegister]);
 
-  /*useEffect(() => {
-    connectAndRegister({
-      username: config.impi,
-      password: config.password,
-    });
-  }, [connectAndRegister]);*/
-
   useEffect(() => {
     if (sessions) {
       Object.keys(sessions).map((sessionId) => (

@@ -4,7 +4,7 @@ import cn from 'classnames';
 import {useSessionCall} from "react-sipjs";
 import {useNavigate} from "react-router-dom";
 
-const CallActions = ({sessionData}) => {
+const CallActions = ({sessionManager, sessionData}) => {
 
   const [muted, setMuted] = useState(false);
   const [speakerActive, setSpeakerActive] = useState(false);
@@ -28,6 +28,7 @@ const CallActions = ({sessionData}) => {
   const navigate = useNavigate();
 
   const rejectCall = () => {
+    sessionManager?.disconnect();
     hangup();
     navigate(-1);
   }
@@ -76,6 +77,7 @@ const CallActions = ({sessionData}) => {
   const speakerToggle = async () => {
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
       console.log("enumerateDevices() не поддерживается.");
+      alert("enumerateDevices() не поддерживается.")
       return;
     }
 
@@ -85,15 +87,18 @@ const CallActions = ({sessionData}) => {
 
       if (outDevices.length === 0) {
         console.log("No suitable audio output devices found.");
+        alert("No suitable audio output devices found.")
         return;
       }
 
       const nextDeviceIndex = speakerActive ? 0 : (outDevices.length > 1 ? 1 : 0);
       await audioRef.current.setSinkId(outDevices[nextDeviceIndex].deviceId);
       console.log(`Audio is being output on ${outDevices[nextDeviceIndex].label}`);
+      alert(`Audio is being output on ${outDevices[nextDeviceIndex].label}`);
       setSpeakerActive(!speakerActive);
     } catch (err) {
       console.log(err.name + ": " + err.message);
+      alert(err.name + ": " + err.message)
     }
   };
 

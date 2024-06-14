@@ -44,36 +44,6 @@ const CallActions = ({sessionManager, sessionData}) => {
     }
   }
 
-  /*const speakerToggle = async () => {
-
-    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-      console.log("enumerateDevices() не поддерживается.");
-      return;
-    }
-
-    setSpeakerActive(!speakerActive);
-
-    navigator.mediaDevices
-      .enumerateDevices()
-      .then(async function (devices) {
-        const outDevices = devices.filter((device) => device.kind === 'audiooutput' && device.deviceId !== 'default' && device.deviceId !== 'communications');
-        console.log(outDevices)
-
-        if (speakerActive) {
-          await audioRef.current.setSinkId(outDevices[0].deviceId);
-          console.log(`Audio is being output on ${outDevices[0].label}`);
-        } else {
-          await audioRef.current.setSinkId(outDevices[1].deviceId);
-          console.log(`Audio is being output on ${outDevices[1].label}`);
-        }
-
-      })
-      .catch(function (err) {
-        console.log(err.name + ": " + err.message);
-      });
-
-  };*/
-
   const speakerToggle = async () => {
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
       console.log("enumerateDevices() не поддерживается.");
@@ -86,15 +56,15 @@ const CallActions = ({sessionManager, sessionData}) => {
       const outDevices = devices.filter(device => device.kind === 'audiooutput' && device.deviceId !== 'default' && device.deviceId !== 'communications');
 
       if (outDevices.length === 0) {
-        console.log("No suitable audio output devices found.");
-        alert("No suitable audio output devices found.")
+        console.log("Не найдено подходящих устройств вывода звука.");
+        alert("Не найдено подходящих устройств вывода звука.")
         return;
       }
 
       const nextDeviceIndex = speakerActive ? 0 : (outDevices.length > 1 ? 1 : 0);
       await audioRef.current.setSinkId(outDevices[nextDeviceIndex].deviceId);
-      console.log(`Audio is being output on ${outDevices[nextDeviceIndex].label}`);
-      alert(`Audio is being output on ${outDevices[nextDeviceIndex].label}`);
+      console.log(`Звук выводится на ${outDevices[nextDeviceIndex].label}`);
+      alert(`Звук выводится на ${outDevices[nextDeviceIndex].label}`);
       setSpeakerActive(!speakerActive);
     } catch (err) {
       console.log(err.name + ": " + err.message);

@@ -2,10 +2,9 @@ import cn from 'classnames'
 import Icon from "@components/Icon";
 import {Link} from "react-router-dom";
 import HeaderBackButton from "./buttons/header-back-button";
-import { useLocation, useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import ModalLogout from "./modals/ModalLogout";
 import {useEffect, useState} from "react";
-
 
 
 const TopBlock = ({isFixed = true}) => {
@@ -17,15 +16,37 @@ const TopBlock = ({isFixed = true}) => {
   const [modalLogOutActive, setModalLogOutActive] = useState(false);
 
 
-
   const goCall = async () => {
-    await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-      .then((data) => {
-        if (data.active) {
+    try {
+      const permissionStatus = await navigator.permissions.query({ name: "microphone" });
+      console.log(permissionStatus);
+
+      if (!navigator.getUserMedia) {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+          navigator.mozGetUserMedia || navigator.msGetUserMedia;
+      }
+
+      if (navigator.getUserMedia) {
+        if (permissionStatus.state === 'denied') {
+          alert('Доступ к микрофону был отклонен. Пожалуйста, разрешите доступ в настройках приложения.');
+        } else if (permissionStatus.state === 'prompt') {
+          navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+            .then((data) => {
+              console.log(data);
+              if (data.active) {
+                navigate('/call');
+              }
+            })
+            .catch(e => console.log(e));
+        } else if (permissionStatus.state === 'granted') {
           navigate('/call');
         }
-      })
-  }
+      }
+
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
 
   return (
@@ -50,7 +71,7 @@ const TopBlock = ({isFixed = true}) => {
                   <div className="top-block__title">
                     <span className="top-block__user-name">Настройки</span>
                   </div>
-                  <button onClick={() => setModalLogOutActive(true)} className="top-block__btn top-block__btn_right" >
+                  <button onClick={() => setModalLogOutActive(true)} className="top-block__btn top-block__btn_right">
                     <Icon name="log-out"/>
                   </button>
                 </>
